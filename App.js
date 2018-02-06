@@ -1,56 +1,54 @@
 import React from 'react';
+import Emoji from './Emoji';
 import { StyleSheet, Text, View, Alert, FlatList } from 'react-native';
 
-function showAlert(title) {
-  Alert.alert(
-    title,
-    null,
-    [
-      {text: 'Cancelar', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-      {text: 'OK', onPress: () => console.log('OK Pressed')},
-    ],
-    { cancelable: false }
-  )
-}
+const emojiList = [
+  {
+    name: 'smile',
+    label: 'Feliz'
+  },
+  {
+    name: 'confounded',
+    label: 'Confuso'
+  },
+  {
+    name: 'angry',
+    label: 'Raiva'
+  },
+  {
+    name: 'rage',
+    label: 'Furioso'
+  },
+  {
+    name: 'anguished',
+    label: 'Frustrado'
+  },
+  {
+    name: 'flushed',
+    label: 'Envergonhado'
+  },
+];
 
 export default class App extends React.Component {
   render() {
+    const marginRight = (index, length) => (index + 1) !== length ? 10 : 0;
+
     return (
       <View style={styles.container}>
-        <Text style={{fontSize: 30, textAlign: 'center', color: 'white'}}>Como você está se sentindo agora?</Text>
-        <View style={{height: 80}}>
+        <Text style={styles.question}>
+          Como você está se sentindo agora?
+        </Text>
+        <View style={styles.emojiList}>
           <FlatList
             showsHorizontalScrollIndicator={false}
-            data={[
-              {
-                key: 'feliz',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('feliz')}>😄</Text>
-              },
-              {
-                key: 'triste',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('triste')}>😢</Text>
-              },
-              {
-                key: 'chorando',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('chorando')}>😭</Text>
-              },
-              {
-                key: 'animado',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('animado')}>🤩</Text>
-              },
-              {
-                key: 'raiva',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('raiva')}>😡</Text>
-              },
-              {
-                key: 'muita raiva',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('muita raiva')}>🤬</Text>
-              },
-              {
-                key: 'sono',
-                emoji: <Text style={{fontSize: 70}} onPress={() => showAlert('sono')}>😴</Text>
-              }
-            ]}
+            data={
+              emojiList.map((emoji, i, list) => ({
+                key: emoji.name,
+                emoji: <Emoji name={emoji.name} label={emoji.label} style={{
+                  marginRight: marginRight(i, list.length)
+                }}/>
+              }))
+            }
             horizontal={true}
             renderItem={({item}) => item.emoji}
           />
@@ -63,8 +61,19 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3498DB',
+    backgroundColor: '#1dcaff',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  question: {
+    fontSize: 35, 
+    textAlign: 'center', 
+    color: 'white', 
+    fontFamily: 'Roboto', 
+    fontWeight: '500', 
+    marginBottom: 10
+  },
+  emojiList: {
+    height: 150
   }
 });
