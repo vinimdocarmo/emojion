@@ -1,6 +1,6 @@
 # Emojion
 
-![screenshot](https://github.com/vinimdocarmo/emojion/blob/master/screenshot.jpeg)
+![screenshot](https://github.com/vinimdocarmo/emojion/blob/master/screenshot.jpg)
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
